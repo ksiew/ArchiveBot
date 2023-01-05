@@ -124,7 +124,9 @@ bot.on('message', msg => {;
                                 await channel.messages
                                 .fetch({ limit: 100, before: message.id })
                                 .then(messagePage => {
-                                    messagePage.forEach(msg => $messagelist.push(msg.content));
+                                    messagePage.forEach(msg => {
+                                        if(msg.content) $messagelist.push(msg.content)
+                                    });
                                     // Update our message pointer to be last message in page of messages
                                     message = 0 < messagePage.size ? messagePage[messagePage.size - 1] : null;
                                     channel.bulkDelete(messagePage)
