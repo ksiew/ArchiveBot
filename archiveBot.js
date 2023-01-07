@@ -66,7 +66,7 @@ bot.on('ready', () => {
 // });
 var confirm = 0;
 
-var channelList = [];
+var channelList = {};
 
 
 bot.on('message', msg => {;
@@ -91,7 +91,7 @@ bot.on('message', msg => {;
 
         case '!confirm':
             if(confirm == 1){
-                channelList.forEach(async channel=> {
+                channelList[msg.guild.id].forEach(async channel=> {
                     let $messagelist = [];
                     // channel.messages.fetch({ limit: 1 }).then(messages => {
                     //     lastMessage = messages.first();
@@ -158,27 +158,28 @@ bot.on('message', msg => {;
             break;
 
         case "!add":
-            if(channelList.includes(msg.channel)){
+            if(!channelList[msg.guild.id]) channelList[msg.guild.id] = [];
+            if(channelList[msg.guild.id].includes(msg.channel)){
                 msg.reply('Channel already in list');
             }else{
-                channelList.push(msg.channel);
+                channelList[msg.guild.id].push(msg.channel);
                 msg.reply('Channel added');
             }
             break;
 
         case "!remove":
-            var index = channelList.indexOf(msg.channel);
+            var index = channelList[msg.guild.id].indexOf(msg.channel);
             if(index == -1){
                 msg.reply('Channel not in list');
             }else{
-                channelList.splice(index, 1);
+                channelList[msg.guild.id].splice(index, 1);
                 msg.reply('Channel removed');
             }
             break;
 
         case "!list":
-            if(channelList.length > 0){
-                channelList.forEach(channel=>{
+            if(channelList[msg.guild.id].length > 0){
+                channelList[msg.guild.id].forEach(channel=>{
                     msg.reply(channel.name);
                 })
             }else{
