@@ -1,10 +1,10 @@
 # How to use
-To use the bot you must first run it. Once it is running you must specify which channels you wish to archive. Then there is another command the actually archive all channels you have tagged to be archived
+To use the bot you must first go to discord developer tools to create a bot. Get it's client token and put it in an .env file as the property `CLIENT_TOKEN` which will allow this code to run on your bot. then run the code with Node. Once it is running you must specify which channels you wish to archive. Then there is another command the actually archive all channels you have tagged to be archived
 
 ## Setup
 1. clone the Git repo
 2. create an .env file
-3. Add the bot's client token as a property
+3. Add the bot's client token as a property (CLIENT_TOKEN=...)
 4. in the terminal type node ./archiveBot.js
 
 ## Archiving
